@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body { font-family: Arial; background:#f4f6f9; margin:0; }
+    .header { background:#4c6ef5; padding:20px; color:#fff; text-align:center; font-size:22px; }
+    .container { width:90%; margin:auto; margin-top:30px; }
+    .card-grid { display:flex; flex-wrap:wrap; gap:20px; }
+    .card {
+        background:#fff; padding:20px; border-radius:10px; width:180px;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:center;
+    }
+    .card h2 { margin:0; font-size:30px; color:#4c6ef5; }
+    .card p { margin:5px 0 0 0; font-size:16px; }
+    table { width:100%; margin-top:25px; border-collapse:collapse; background:#fff; }
+    th, td { padding:12px; border-bottom:1px solid #ddd; text-align:left; }
+    th { background:#4c6ef5; color:#fff; }
+</style>
+</head>
+<body>
+
+<div class="header">Welcome, <span id="username">User Name</span></div>
+
+<div class="container">
+
+    <div class="card-grid">
+        <div class="card">
+            <h2 id="totalCalls">0</h2>
+            <p>Total Calls</p>
+        </div>
+        <div class="card">
+            <h2 id="totalHires">0</h2>
+            <p>Total Hires</p>
+        </div>
+        <div class="card">
+            <h2 id="working">0</h2>
+            <p>Working Candidates</p>
+        </div>
+        <div class="card">
+            <h2 id="inactive">0</h2>
+            <p>Inactive Candidates</p>
+        </div>
+        <div class="card">
+            <h2 id="payout">₹0</h2>
+            <p>Payout</p>
+        </div>
+    </div>
+
+    <h2>Call Log</h2>
+    <table>
+        <tr><th>Name</th><th>Phone</th><th>Status</th><th>Date</th></tr>
+        <tbody id="callTable"></tbody>
+    </table>
+
+</div>
+
+<script>
+// SAMPLE DATA (Replace with backend later)
+let data = {
+    name: "Aarav",
+    totalCalls: 124,
+    totalHires: 8,
+    working: 5,
+    inactive: 3,
+    payout: 1250,
+    calls: [
+        {name:"Rahul", phone:"9876543210", status:"Connected", date:"22 Nov"},
+        {name:"Ayesha", phone:"9123456780", status:"Not Picked", date:"21 Nov"},
+        {name:"Rohan", phone:"9988221133", status:"Interested", date:"20 Nov"}
+    ]
+};
+
+// Insert data into dashboard
+document.getElementById("username").innerText = data.name
+document.getElementById("totalCalls").innerText = data.totalCalls
+document.getElementById("totalHires").innerText = data.totalHires
+document.getElementById("working").innerText = data.working
+document.getElementById("inactive").innerText = data.inactive
+document.getElementById("payout").innerText = "₹" + data.payout
+
+let table = ""
+data.calls.forEach(c => {
+    table += `<tr>
+                <td>${c.name}</td>
+                <td>${c.phone}</td>
+                <td>${c.status}</td>
+                <td>${c.date}</td>
+              </tr>`
+})
+document.getElementById("callTable").innerHTML = table
+</script>
+
+</body>
+</html>
